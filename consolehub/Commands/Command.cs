@@ -11,12 +11,7 @@ namespace consolehub.Commands
         /// <summary>
         /// Indicates the text that matches this command. Ex: login, repository or user.
         /// </summary>
-        public String matchExpression { get; }
-
-        public Command(String matchExpression)
-        {
-            this.matchExpression = matchExpression;
-        }
+        public abstract string Name { get; }
 
         /// <summary>
         /// Executes the current command.
@@ -27,5 +22,11 @@ namespace consolehub.Commands
         /// Prints the command's help section.
         /// </summary>
         public abstract void PrintHelp();
+
+        /// <summary>
+        /// Creates a command from the given args.
+        /// </summary>
+        /// <param name="args"></param>
+        public abstract Command CreateCommand(string[] args);
     }
 }

@@ -17,26 +17,33 @@ namespace consolehub
             SettingsManager.Init();
             Command[] availableCommands =
             {
-                new Login("login")
+                new Login(),
+                new Repos()
             };
+            var parser = new CommandParser(availableCommands);
 
-            ConsoleHub(availableCommands).GetAwaiter().GetResult();
+            ConsoleHub(parser).GetAwaiter().GetResult();
         }
 
-        static async Task ConsoleHub(Command[] availableCommands)
+        static async Task ConsoleHub(CommandParser parser)
         {
             if (!SettingsManager.Exists("access_token"))
             {
                 Console.WriteLine("Seems like you haven't logged in yet. Let's do it!");
-                await availableCommands
-                    .Where(command => command.matchExpression == "login")
-                    .First()
-                    .Execute();
+                var loginCmd = new Login();
+                await loginCmd.Execute();
             }
-            else
+
+            Console.WriteLine("You're logged in!");
+            string[] input = { "" };
+
+            while (!input[0].Equals("exit"))
             {
-                Console.WriteLine("You're logged in!");
-                Console.ReadKey();
+                Console.Write("> ");
+                input = Console.ReadLine().Split();
+
+                var cmd = parser.ParseCommand(input);
+                await cmd.Execute();
             }
         }
     }

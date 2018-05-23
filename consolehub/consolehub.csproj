@@ -47,11 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\NotFoundCommand.cs" />
+    <Compile Include="Commands\Repos.cs" />
     <Compile Include="Credentials.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\Login.cs" />
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Util\CommandParser.cs" />
     <Compile Include="Util\GHClient.cs" />
     <Compile Include="Util\SettingsManager.cs" />
   </ItemGroup>

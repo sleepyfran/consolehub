@@ -10,7 +10,12 @@ namespace consolehub.Commands
 {
     public class Login : Command
     {
-        public Login(string matchExpression) : base(matchExpression) { }
+        public override string Name => "login";
+
+        public override Command CreateCommand(string[] args)
+        {
+            return new Login();
+        }
 
         public override async Task Execute()
         {
