@@ -38,6 +38,7 @@ namespace Consolehub.Util
 
         public static void WritePrompt()
         {
+            Console.WriteLine();
             Console.Write(DefaultPrompt);
         }
 
