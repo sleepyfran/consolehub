@@ -24,6 +24,62 @@ namespace Consolehub.Commands
 
         public ReposCommand() { }
 
+        /// <summary>
+        /// Shows an error indicating that the username could not be found.
+        /// </summary>
+        /// <param name="username">Username that could not be found</param>
+        private void showUsernameNotFoundError(string username)
+        {
+            UI.WriteLineRed($"The username {username} doesn't exist");
+        }
+
+        /// <summary>
+        /// Shows an unknown exception in the screen.
+        /// </summary>
+        /// <param name="error">Exception to print</param>
+        private void showException(Exception error)
+        {
+            UI.WriteLineRed(error.Message);
+        }
+
+        /// <summary>
+        /// Fetches the repositories of the current logged in user.
+        /// </summary>
+        /// <returns>Repositories of the current user</returns>
+        private async Task<IReadOnlyList<Repository>> getUserRepositories()
+        {
+            try
+            {
+                var repositories = await GHClient.client.Repository.GetAllForCurrent();
+                return repositories;
+            }
+            catch (ApiException error)
+            {
+                showException(error);
+            }
+
+            return new List<Repository>();
+        }
+
+        /// <summary>
+        /// Fetches the repositories of the specified user.
+        /// </summary>
+        /// <returns>Repositories of the spcecified user</returns>
+        private async Task<IReadOnlyList<Repository>> getRepositoriesOf(string username)
+        {
+            try
+            {
+                var repositories = await GHClient.client.Repository.GetAllForUser(username);
+                return repositories;
+            }
+            catch (ApiException error)
+            {
+                showUsernameNotFoundError(username);
+            }
+
+            return new List<Repository>();
+        }
+
         public override Command CreateCommand(string[] args, string[] flags)
         {
             var command = new ReposCommand();
@@ -59,12 +115,12 @@ namespace Consolehub.Commands
             if (username == null)
             {
                 Console.WriteLine("Getting your repos...");
-                repositories = await GHClient.client.Repository.GetAllForCurrent();
+                repositories = await getUserRepositories();
             }
             else
             {
                 Console.WriteLine("Getting repos from {0}...", username);
-                repositories = await GHClient.client.Repository.GetAllForUser(username);
+                repositories = await getRepositoriesOf(username);
             }           
 
             if (ignorePrivateRepositories)
