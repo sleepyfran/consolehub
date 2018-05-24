@@ -53,6 +53,14 @@ namespace consolehub.Util
         }
 
         /// <summary>
+        /// Removes the credential from the client.
+        /// </summary>
+        static public void RemoveCredentials(string accessToken)
+        {
+            client.Authorization.RevokeApplicationAuthentication(ApiKeys.API_KEY, accessToken);
+        }
+
+        /// <summary>
         /// Returns the access code from the given URL.
         /// </summary>
         /// <param name="responseUrl">User log in response URL</param>

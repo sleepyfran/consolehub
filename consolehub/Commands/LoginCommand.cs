@@ -19,6 +19,13 @@ namespace consolehub.Commands
 
         public override async Task Execute()
         {
+            // Check first if we're already logged in.
+            if (SettingsManager.Exists("access_token"))
+            {
+                Console.WriteLine("You're already logged in. Log out first if you want to switch accounts.");
+                return;
+            }
+
             var loginUrl = GHClient.GetLoginUrl();
 
             Console.WriteLine("This app uses OAuth to log into your account.");

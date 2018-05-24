@@ -61,5 +61,15 @@ namespace consolehub.Util
             appSettings.Add(key, value);
             appConfiguration.Save(ConfigurationSaveMode.Minimal);
         }
+
+        /// <summary>
+        /// Removes the specified key from the app settings.
+        /// </summary>
+        /// <param name="key">Key to remove</param>
+        public static void Remove(string key)
+        {
+            appSettings.Remove(key);
+            appConfiguration.Save(ConfigurationSaveMode.Minimal);
+        }
     }
 }

@@ -18,8 +18,10 @@ namespace consolehub
             Command[] availableCommands =
             {
                 new LoginCommand(),
+                new LogoutCommand(),
                 new ReposCommand(),
                 new ExitCommand(),
+                new ClearCommand(),
             };
             var parser = new CommandParser(availableCommands);
 
@@ -45,7 +47,7 @@ namespace consolehub
             while (true)
             {
                 Console.Write("> ");
-                input = Console.ReadLine().Split();
+                input = Console.ReadLine().Split(' ');
 
                 var cmd = parser.ParseCommand(input);
                 await cmd.Execute();

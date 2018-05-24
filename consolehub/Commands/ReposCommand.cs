@@ -38,6 +38,11 @@ namespace consolehub.Commands
 
         public override async Task Execute()
         {
+            if (!checkUserIsLoggedIn())
+            {
+                return;
+            }
+
             IReadOnlyList<Repository> repositories;
 
             if (username == null)
