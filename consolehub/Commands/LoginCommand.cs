@@ -1,12 +1,12 @@
 ﻿using System;
-using consolehub.Util;
+using Consolehub.Util;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace consolehub.Commands
+namespace Consolehub.Commands
 {
     public class LoginCommand : Command
     {

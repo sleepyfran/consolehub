@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Octokit;
-using consolehub.Util;
+using Consolehub.Util;
 
-namespace consolehub.Commands
+namespace Consolehub.Commands
 {
     class ReposCommand : Command
     {

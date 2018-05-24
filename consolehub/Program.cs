@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using consolehub.Commands;
-using consolehub.Util;
+using Consolehub.Commands;
+using Consolehub.Util;
 
-namespace consolehub
+namespace Consolehub
 {
     class Program
     {
