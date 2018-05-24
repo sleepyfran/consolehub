@@ -18,7 +18,8 @@ namespace consolehub
             Command[] availableCommands =
             {
                 new LoginCommand(),
-                new ReposCommand()
+                new ReposCommand(),
+                new ExitCommand(),
             };
             var parser = new CommandParser(availableCommands);
 
@@ -39,9 +40,9 @@ namespace consolehub
             GHClient.SetCredentials(accessToken);
 
             Console.WriteLine("You're logged in!");
-            string[] input = { "" };
+            string[] input;
 
-            while (!input[0].Equals("exit"))
+            while (true)
             {
                 Console.Write("> ");
                 input = Console.ReadLine().Split();

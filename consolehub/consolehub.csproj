@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\NotFoundCommand.cs" />
     <Compile Include="Commands\ReposCommand.cs" />
     <Compile Include="ApiKeys.cs" />
