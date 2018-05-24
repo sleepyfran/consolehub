@@ -8,7 +8,7 @@ using Consolehub.Util;
 
 namespace Consolehub.Commands
 {
-    class ReposCommand : Command
+    class ReposCommand : ICommand
     {
         public override string Name => "repos";
 
@@ -80,7 +80,7 @@ namespace Consolehub.Commands
             return new List<Repository>();
         }
 
-        public override Command CreateCommand(string[] args, string[] flags)
+        public override ICommand CreateCommand(string[] args, string[] flags)
         {
             var command = new ReposCommand();
 

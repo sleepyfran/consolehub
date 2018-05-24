@@ -7,7 +7,7 @@ using Consolehub.Util;
 
 namespace Consolehub.Commands
 {
-    class ChangePromptCommand : Command
+    class ChangePromptCommand : ICommand
     {
         public override string Name => "prompt";
 
@@ -27,7 +27,7 @@ namespace Consolehub.Commands
             }
         }
 
-        public override Command CreateCommand(string[] args, string[] flags)
+        public override ICommand CreateCommand(string[] args, string[] flags)
         {
             return new ChangePromptCommand(args);
         }

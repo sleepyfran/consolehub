@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Consolehub.Commands
 {
-    class ClearCommand : Command
+    class ClearCommand : ICommand
     {
         public override string Name => "clear";
 
-        public override Command CreateCommand(string[] args, string[] flags)
+        public override ICommand CreateCommand(string[] args, string[] flags)
         {
             return new ClearCommand();
         }

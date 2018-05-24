@@ -7,11 +7,11 @@ using Consolehub.Util;
 
 namespace Consolehub.Commands
 {
-    class LogoutCommand : Command
+    class LogoutCommand : ICommand
     {
         public override string Name => "logout";
 
-        public override Command CreateCommand(string[] args, string[] flags)
+        public override ICommand CreateCommand(string[] args, string[] flags)
         {
             return new LogoutCommand();
         }

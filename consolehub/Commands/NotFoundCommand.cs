@@ -7,11 +7,11 @@ using Consolehub.Util;
 
 namespace Consolehub.Commands
 {
-    class NotFoundCommand : Command
+    class NotFoundCommand : ICommand
     {
         public override string Name => "";
 
-        public override Command CreateCommand(string[] args, string[] flags)
+        public override ICommand CreateCommand(string[] args, string[] flags)
         {
             return new NotFoundCommand();
         }

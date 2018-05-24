@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Consolehub.Commands
 {
-    class ExitCommand : Command
+    class ExitCommand : ICommand
     {
         public override string Name => "exit";
 
-        public override Command CreateCommand(string[] args, string[] flags)
+        public override ICommand CreateCommand(string[] args, string[] flags)
         {
             return new ExitCommand();
         }

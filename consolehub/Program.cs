@@ -16,7 +16,7 @@ namespace Consolehub
         {
             // Initialize app.
             SettingsManager.Init();
-            Command[] availableCommands =
+            ICommand[] availableCommands =
             {
                 new LoginCommand(),
                 new LogoutCommand(),

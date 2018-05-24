@@ -8,11 +8,11 @@ using System.Diagnostics;
 
 namespace Consolehub.Commands
 {
-    public class LoginCommand : Command
+    public class LoginCommand : ICommand
     {
         public override string Name => "login";
 
-        public override Command CreateCommand(string[] args, string[] flags)
+        public override ICommand CreateCommand(string[] args, string[] flags)
         {
             return new LoginCommand();
         }

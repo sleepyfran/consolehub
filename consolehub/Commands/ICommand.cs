@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Consolehub.Commands
 {
-    public abstract class Command
+    public abstract class ICommand
     {
         /// <summary>
         /// Indicates the text that matches this command. Ex: login, repository or user.
@@ -45,6 +45,6 @@ namespace Consolehub.Commands
         /// </summary>
         /// <param name="args">Arguments passed to the command</param>
         /// <param name="flags">Flags passed to the command</param>
-        public abstract Command CreateCommand(string[] args, string[] flags);
+        public abstract ICommand CreateCommand(string[] args, string[] flags);
     }
 }
