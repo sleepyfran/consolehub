@@ -16,33 +16,45 @@ namespace Consolehub.Commands
         /// </summary>
         private string newPrompt;
 
-        public ChangePromptCommand() { }
+        /// <summary>
+        /// Indicates whether the prompt should or should not be reset.
+        /// </summary>
+        private bool resetPrompt = false;
 
-        public ChangePromptCommand(string[] args)
-        {
-            if (args.Length > 1)
-            {
-                var sanitizedPrompt = args[1].Replace(@"""", "");
-                newPrompt = sanitizedPrompt;
-            }
-        }
+        public ChangePromptCommand() { }
 
         public override ICommand CreateCommand(string[] args, string[] flags)
         {
-            return new ChangePromptCommand(args);
+            var command = new ChangePromptCommand();
+
+            // Handle flags (if any).
+            if (flags.Length > 0)
+            {
+                command.resetPrompt = flags
+                                .Where(flag => flag == "--reset")
+                                .Count() > 0;
+            }
+
+            // Handle args (if any).
+            if (args.Length > 0)
+            {
+                var sanitizedPrompt = args[0].Replace(@"""", "");
+                command.newPrompt = sanitizedPrompt;
+            }
+
+            return command;
         }
 
         public override Task Execute()
         {
-            if (newPrompt == null)
-            {
-                PrintHelp();
-                return Task.FromResult(0);
-            }
-            else if (newPrompt.Equals("--reset"))
+            if (resetPrompt)
             {
                 SettingsManager.Remove("prompt");
                 UI.DefaultPrompt = "> ";
+                return Task.FromResult(0);
+            } else if (newPrompt == null)
+            {
+                PrintHelp();
                 return Task.FromResult(0);
             }
 
