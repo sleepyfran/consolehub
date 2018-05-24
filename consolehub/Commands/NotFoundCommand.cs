@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using consolehub.Util;
 
 namespace consolehub.Commands
 {
@@ -17,7 +18,7 @@ namespace consolehub.Commands
 
         public override Task Execute()
         {
-            Console.WriteLine("Command not recognized. Use help to print all the available commands");
+            UI.WriteLineRed("Command not recognized. Use help to print all the available commands");
             return Task.FromResult(0);
         }
 

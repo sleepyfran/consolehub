@@ -23,7 +23,7 @@ namespace consolehub.Commands
         {
             if (!SettingsManager.Exists("access_token"))
             {
-                Console.WriteLine("You need to log in before doing this.");
+                UI.WriteLineRed("You need to log in before doing this.");
                 return false;
             }
 

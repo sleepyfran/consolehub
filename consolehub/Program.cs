@@ -25,6 +25,8 @@ namespace consolehub
             };
             var parser = new CommandParser(availableCommands);
 
+            UI.PrintMainTitle();
+
             ConsoleHub(parser).GetAwaiter().GetResult();
         }
 
@@ -41,7 +43,9 @@ namespace consolehub
             var accessToken = SettingsManager.Get("access_token");
             GHClient.SetCredentials(accessToken);
 
-            Console.WriteLine("You're logged in!");
+            // Get the current logged in user to show the data.
+            var currentUser = await GHClient.client.User.Current();
+            UI.WriteLineGreen($"You're logged in as {currentUser.Name} ({currentUser.Email})");
             string[] input;
 
             while (true)

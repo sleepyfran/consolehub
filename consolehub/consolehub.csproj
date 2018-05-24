@@ -60,6 +60,7 @@
     <Compile Include="Util\CommandParser.cs" />
     <Compile Include="Util\GHClient.cs" />
     <Compile Include="Util\SettingsManager.cs" />
+    <Compile Include="Util\UI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
