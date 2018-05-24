@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Octokit;
+using consolehub.Util;
 
 namespace consolehub.Commands
 {
@@ -34,10 +36,29 @@ namespace consolehub.Commands
             }
         }
 
-        public override Task Execute()
+        public override async Task Execute()
         {
-            Console.WriteLine("Doing things");
-            return Task.FromResult(0);
+            IReadOnlyList<Repository> repositories;
+
+            if (username == null)
+            {
+                Console.WriteLine("Getting your repos...");
+                repositories = await GHClient.client.Repository.GetAllForCurrent();
+            }
+            else
+            {
+                Console.WriteLine("Getting repos from {0}...", username);
+                repositories = await GHClient.client.Repository.GetAllForUser(username);
+            }
+
+            Console.WriteLine("Repositories count: {0}", repositories.Count);
+
+            for (int i = 0; i < repositories.Count; i++)
+            {
+                var repository = repositories[i];
+
+                Console.WriteLine("{0}. {1} - {2}", i, repository.FullName, repository.Description);
+            }
         }
 
         public override void PrintHelp()
