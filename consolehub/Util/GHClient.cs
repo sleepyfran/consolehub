@@ -12,7 +12,7 @@ namespace consolehub.Util
         /// <summary>
         /// Default GitHub client used by the app.
         /// </summary>
-        static private GitHubClient client { get; } = 
+        static public GitHubClient client { get; } = 
             new GitHubClient(
                 new ProductHeaderValue("consolehub"));
 
