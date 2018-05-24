@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Consolehub.Commands;
 using Consolehub.Util;
+using System.Text.RegularExpressions;
 
 namespace Consolehub
 {
@@ -22,6 +23,7 @@ namespace Consolehub
                 new ReposCommand(),
                 new ExitCommand(),
                 new ClearCommand(),
+                new ChangePromptCommand(),
             };
             var parser = new CommandParser(availableCommands);
 
@@ -32,6 +34,13 @@ namespace Consolehub
 
         static async Task ConsoleHub(CommandParser parser)
         {
+            // Initialize the prompt from the settings.
+            if (SettingsManager.Exists("prompt"))
+            {
+                var prompt = SettingsManager.Get("prompt");
+                UI.DefaultPrompt = prompt;
+            }
+
             if (!SettingsManager.Exists("access_token"))
             {
                 Console.WriteLine("Seems like you haven't logged in yet. Let's do it!");
@@ -46,14 +55,16 @@ namespace Consolehub
             // Get the current logged in user to show the data.
             var currentUser = await GHClient.client.User.Current();
             UI.WriteLineGreen($"You're logged in as {currentUser.Name} ({currentUser.Email})");
-            string[] input;
+            string[] dividedCommand;
 
             while (true)
             {
-                Console.Write("> ");
-                input = Console.ReadLine().Split(' ');
+                UI.WritePrompt();
 
-                var cmd = parser.ParseCommand(input);
+                var input = Console.ReadLine();
+                dividedCommand = parser.SplitInput(input);
+
+                var cmd = parser.ParseCommand(dividedCommand);
                 await cmd.Execute();
             }
         }

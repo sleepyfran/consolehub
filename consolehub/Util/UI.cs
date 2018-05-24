@@ -8,6 +8,13 @@ namespace Consolehub.Util
 {
     static class UI
     {
+
+        /// <summary>
+        /// Default prompt to be printed to the user. Can be changed through a command and will be 
+        /// loaded from the settings if it was overriden.
+        /// </summary>
+        public static string DefaultPrompt { get; set; } = "> ";
+
         public static void PrintMainTitle()
         {
             WriteLineBlue(
@@ -27,6 +34,11 @@ namespace Consolehub.Util
             Console.ForegroundColor = color;
             print();
             Console.ResetColor();
+        }
+
+        public static void WritePrompt()
+        {
+            Console.Write(DefaultPrompt);
         }
 
         #region Red printing

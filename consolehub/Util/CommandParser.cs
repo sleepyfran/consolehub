@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Consolehub.Commands;
 
@@ -16,6 +17,22 @@ namespace Consolehub.Util
             this.availableCommands = commands;
         }
 
+        /// <summary>
+        /// Divides the input by whitespaces ignoring those inside double quotes.
+        /// </summary>
+        /// <param name="input">Raw input taken from the console</param>
+        /// <returns>Array of strings containing each token (usually [command] [args])</returns>
+        internal string[] SplitInput(string input)
+        {
+            Regex whitespacesRegex = new Regex(@"[ ](?=(?:[^""]*""[^""]*"")*[^""]*$)");
+            return whitespacesRegex.Split(input);
+        }
+
+        /// <summary>
+        /// Finds and creates a command from a given set of tokens.
+        /// </summary>
+        /// <param name="args">Array of strings with the tokens</param>
+        /// <returns>A Command interface subclass that matches the given command</returns>
         internal Command ParseCommand(string[] args)
         {
             var commandName = args[0];
