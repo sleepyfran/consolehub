@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace consolehub.Commands
 {
-    class Repos : Command
+    class ReposCommand : Command
     {
         public override string Name => "repos";
 
@@ -15,9 +15,9 @@ namespace consolehub.Commands
         /// </summary>
         private string username;
 
-        public Repos() { }
+        public ReposCommand() { }
 
-        public Repos(string username)
+        public ReposCommand(string username)
         {
             this.username = username;
         }
@@ -26,11 +26,11 @@ namespace consolehub.Commands
         {
             if (args.Length > 1)
             {
-                return new Repos(args[1]);
+                return new ReposCommand(args[1]);
             }
             else
             {
-                return new Repos();
+                return new ReposCommand();
             }
         }
 

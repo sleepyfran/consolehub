@@ -12,14 +12,16 @@ namespace consolehub.Util
         /// <summary>
         /// Default GitHub client used by the app.
         /// </summary>
-        static public GitHubClient client = new GitHubClient(new ProductHeaderValue("consolehub"));
+        static private GitHubClient client { get; } = 
+            new GitHubClient(
+                new ProductHeaderValue("consolehub"));
 
         /// <summary>
         /// Generates an OauthLoginRequest and uses it to obtain the login URL.
         /// </summary>
         static public Uri GetLoginUrl()
         {
-            var request = new OauthLoginRequest(Credentials.API_KEY)
+            var request = new OauthLoginRequest(ApiKeys.API_KEY)
             {
                 Scopes = { "user", "repo", "notifications" }
             };
@@ -35,10 +37,19 @@ namespace consolehub.Util
         static public async Task<string> GetAccessToken(string responseUrl)
         {
             var code = getCodeFromUrl(responseUrl);
-            var request = new OauthTokenRequest(Credentials.API_KEY, Credentials.API_SECRET, code);
+            var request = new OauthTokenRequest(ApiKeys.API_KEY, ApiKeys.API_SECRET, code);
             var token = await client.Oauth.CreateAccessToken(request);
 
             return token.AccessToken;
+        }
+
+        /// <summary>
+        /// Sets the credentials in the client so we can start making requests.
+        /// </summary>
+        /// <param name="accessToken">String containing the access token of the user</param>
+        static public void SetCredentials(string accessToken)
+        {
+            client.Credentials = new Octokit.Credentials(accessToken);
         }
 
         /// <summary>

@@ -8,13 +8,13 @@ using System.Diagnostics;
 
 namespace consolehub.Commands
 {
-    public class Login : Command
+    public class LoginCommand : Command
     {
         public override string Name => "login";
 
         public override Command CreateCommand(string[] args)
         {
-            return new Login();
+            return new LoginCommand();
         }
 
         public override async Task Execute()
@@ -45,6 +45,7 @@ namespace consolehub.Commands
 
             Console.WriteLine("Nice! Wait a second, we're getting your access token...");
             var accessToken = await GHClient.GetAccessToken(responseUrl);
+            GHClient.SetCredentials(accessToken);
 
             // Save this access token.
             SettingsManager.Set("access_token", accessToken);
