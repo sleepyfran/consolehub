@@ -65,6 +65,7 @@ namespace Consolehub
                 dividedCommand = parser.SplitInput(input);
 
                 var cmd = parser.ParseCommand(dividedCommand);
+                UI.NewLine();
                 await cmd.Execute();
             }
         }

@@ -36,9 +36,14 @@ namespace Consolehub.Util
             Console.ResetColor();
         }
 
-        public static void WritePrompt()
+        public static void NewLine()
         {
             Console.WriteLine();
+        }
+
+        public static void WritePrompt()
+        {
+            NewLine();
             Console.Write(DefaultPrompt);
         }
 
