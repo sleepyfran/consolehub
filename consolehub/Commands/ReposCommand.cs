@@ -13,27 +13,38 @@ namespace Consolehub.Commands
         public override string Name => "repos";
 
         /// <summary>
-        /// Nombre del usuario en GitHub para obtener sus repositorios.
+        /// Username in GitHub from whom we will get the repositories.
         /// </summary>
         private string username;
 
+        /// <summary>
+        /// Indicates whether we should ignore the private repositories or not.
+        /// </summary>
+        private bool ignorePrivateRepositories = false;
+
         public ReposCommand() { }
 
-        public ReposCommand(string username)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
-            this.username = username;
-        }
+            var command = new ReposCommand();
 
-        public override Command CreateCommand(string[] args)
-        {
-            if (args.Length > 1)
+            // Attempt to get the available flags.
+            if (flags.Length > 0)
             {
-                return new ReposCommand(args[1]);
+                bool ignorePrivates = flags
+                                        .Where(arg => arg.Equals("--ignore-private"))
+                                        .Count() > 0;
+
+                command.ignorePrivateRepositories = ignorePrivates;
             }
-            else
+
+            // Attempt to find some args.
+            if (args.Length > 0)
             {
-                return new ReposCommand();
+                command.username = args[0];
             }
+
+            return command;
         }
 
         public override async Task Execute()
@@ -54,6 +65,11 @@ namespace Consolehub.Commands
             {
                 Console.WriteLine("Getting repos from {0}...", username);
                 repositories = await GHClient.client.Repository.GetAllForUser(username);
+            }           
+
+            if (ignorePrivateRepositories)
+            {
+                repositories = repositories.Where(repo => !repo.Private).ToList();
             }
 
             Console.WriteLine("Repositories count: {0}", repositories.Count);
@@ -62,13 +78,16 @@ namespace Consolehub.Commands
             {
                 var repository = repositories[i];
 
-                Console.WriteLine("{0}. {1} - {2}", i, repository.FullName, repository.Description);
+                UI.WriteBlue($"{i + 1}. {repository.FullName}: ");
+                Console.WriteLine($"{repository.Description}");
             }
         }
 
         public override void PrintHelp()
         {
-            Console.WriteLine("repos [username] - List all the repos of the specified username");
+            UI.WriteLineBlue("repos [username] [options] - List all the repos of the specified username");
+            UI.WriteLineBlue("OPTIONS");
+            UI.WriteLineBlue("--ignore-private: Ignore user's private repositories");
         }
     }
 }

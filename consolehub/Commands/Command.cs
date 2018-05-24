@@ -43,7 +43,8 @@ namespace Consolehub.Commands
         /// <summary>
         /// Creates a command from the given args.
         /// </summary>
-        /// <param name="args"></param>
-        public abstract Command CreateCommand(string[] args);
+        /// <param name="args">Arguments passed to the command</param>
+        /// <param name="flags">Flags passed to the command</param>
+        public abstract Command CreateCommand(string[] args, string[] flags);
     }
 }

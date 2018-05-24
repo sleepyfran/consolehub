@@ -42,8 +42,19 @@ namespace Consolehub.Util
             {
                 return new NotFoundCommand();
             }
+            
+            // Get all flags starting with --.
+            string[] flags = args
+                                .Where(arg => arg.StartsWith("--"))
+                                .ToArray();
 
-            return command.CreateCommand(args);
+            // The rest of them, skipping the first (command name) should be the arguments.
+            string[] commandArgs = args
+                                    .Skip(1)
+                                    .Where(arg => !arg.StartsWith("--"))
+                                    .ToArray();
+
+            return command.CreateCommand(commandArgs, flags);
         }
 
         private Command FindCommand(String name)

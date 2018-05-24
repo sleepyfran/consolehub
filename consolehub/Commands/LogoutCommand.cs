@@ -11,7 +11,7 @@ namespace Consolehub.Commands
     {
         public override string Name => "logout";
 
-        public override Command CreateCommand(string[] args)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             return new LogoutCommand();
         }
