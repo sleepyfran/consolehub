@@ -26,7 +26,7 @@ namespace consolehub.Util
                 return new NotFoundCommand();
             }
 
-            return command;
+            return command.CreateCommand(args);
         }
 
         private Command FindCommand(String name)
