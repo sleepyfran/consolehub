@@ -36,6 +36,12 @@ namespace Consolehub.Util
         internal ICommand ParseCommand(string[] args)
         {
             var commandName = args[0];
+
+            if (commandName == "help")
+            {
+                return new HelpCommand(availableCommands);
+            }
+
             var command = FindCommand(commandName);
 
             if (command == null)

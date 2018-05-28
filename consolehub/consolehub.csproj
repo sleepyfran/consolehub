@@ -50,6 +50,7 @@
     <Compile Include="Commands\ChangePromptCommand.cs" />
     <Compile Include="Commands\ClearCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\IssuesCommand.cs" />
     <Compile Include="Commands\LogoutCommand.cs" />
     <Compile Include="Commands\NotFoundCommand.cs" />
