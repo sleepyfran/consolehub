@@ -134,8 +134,12 @@ namespace Consolehub.Commands
             {
                 var repository = repositories[i];
 
-                UI.WriteBlue($"{i + 1}. {repository.FullName}: ");
-                Console.WriteLine($"{repository.Description}");
+                Console.Write($"{i + 1}. ");
+                UI.WriteCyan($"{repository.FullName}");
+                Console.Write($" - ");
+                UI.WriteBlue(repository.Description);
+
+                Console.WriteLine();
             }
         }
 
