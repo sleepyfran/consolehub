@@ -24,6 +24,7 @@ namespace Consolehub
                 new ExitCommand(),
                 new ClearCommand(),
                 new ChangePromptCommand(),
+                new IssuesCommand(),
             };
             var parser = new CommandParser(availableCommands);
 

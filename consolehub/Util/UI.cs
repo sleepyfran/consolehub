@@ -82,5 +82,17 @@ namespace Consolehub.Util
             SetTemporalColor(ConsoleColor.Green, () => Console.Write(text));
         }
         #endregion
+
+        #region Cyan printing
+        public static void WriteLineCyan(string text)
+        {
+            SetTemporalColor(ConsoleColor.Cyan, () => Console.WriteLine(text));
+        }
+
+        public static void WriteCyan(string text)
+        {
+            SetTemporalColor(ConsoleColor.Cyan, () => Console.Write(text));
+        }
+        #endregion
     }
 }
