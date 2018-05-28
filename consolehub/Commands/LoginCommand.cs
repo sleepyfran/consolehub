@@ -60,7 +60,7 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            UI.WriteLineBlue("login: Shows the login wizard to help you through the login process.");
+            UI.WriteLineBlue("login - Shows the login wizard to help you through the login process.");
         }
     }
 }

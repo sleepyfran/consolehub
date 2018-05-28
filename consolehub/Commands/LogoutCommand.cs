@@ -29,7 +29,7 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            Console.WriteLine("logout - Logs out from the current account");
+            UI.WriteLineBlue("logout - Logs out from the current account");
         }
     }
 }
