@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Consolehub.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            Console.WriteLine("exit - Pretty self-explanatory, don't you think?");
+            UI.WriteLineBlue("exit - Pretty self-explanatory, don't you think?");
         }
     }
 }
