@@ -38,6 +38,9 @@ namespace Consolehub.Commands
             {
                 switch (args[0])
                 {
+                    case "all":
+                        command.issuesFilter = IssueFilter.All;
+                        break;
                     case "assigned":
                         command.issuesFilter = IssueFilter.Assigned;
                         break;
@@ -50,6 +53,8 @@ namespace Consolehub.Commands
                     case "subscribed":
                         command.issuesFilter = IssueFilter.Subscribed;
                         break;
+                    default:
+                        throw new ArgumentException("Unrecognized filter " + args[0]);
                 }
             }
 
@@ -63,6 +68,8 @@ namespace Consolehub.Commands
                     case "closed":
                         command.issuesState = ItemStateFilter.Closed;
                         break;
+                    default:
+                        throw new ArgumentException("Unrecognized state " + args[1]);
                 }
             }
 
