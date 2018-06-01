@@ -12,6 +12,14 @@ namespace Consolehub.Commands
     {
         public override string Name => "issues";
 
+        public override string Description => "issues [filter] [state]: Shows the issues of the logged in user";
+
+        public override string[] Options => new[]
+        {
+            "[filter]: all (default), assigned, created",
+            "[state]: all (default), open, closed",
+        };
+
         /// <summary>
         /// Selected filter passed as an argument.
         /// </summary>
@@ -62,6 +70,9 @@ namespace Consolehub.Commands
             {
                 switch (args[1])
                 {
+                    case "all":
+                        command.issuesState = ItemStateFilter.All;
+                        break;
                     case "open":
                         command.issuesState = ItemStateFilter.Open;
                         break;
@@ -78,7 +89,7 @@ namespace Consolehub.Commands
 
         public override async Task Execute()
         {
-            if (!checkUserIsLoggedIn())
+            if (!IsUserLoggedIn())
             {
                 return;
             }
@@ -119,13 +130,6 @@ namespace Consolehub.Commands
 
                 Console.WriteLine();
             }
-        }
-
-        public override void PrintHelp()
-        {
-            Ui.WriteLineBlue("issues [filter] [state] - Shows a list of all your current issues");
-            Ui.WriteLineBlue("[filter]: all (default), assigned, created, mentioned and subscribed");
-            Ui.WriteLineBlue("[state]: all (default), closed and open");
         }
     }
 }

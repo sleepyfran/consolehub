@@ -11,6 +11,10 @@ namespace Consolehub.Commands
     {
         public override string Name => "help";
 
+        public override string Description => "help [command]: Prints the help of all available commands or the specified one";
+
+        public override string[] Options => new string[0];
+
         /// <summary>
         /// List of available commands in the program.
         /// </summary>
@@ -30,16 +34,10 @@ namespace Consolehub.Commands
         {
             foreach (var command in availableCommands)
             {
-                command.PrintHelp();
                 Ui.NewLine();
             }
 
             return Task.FromResult(0);
-        }
-
-        public override void PrintHelp()
-        {
-            throw new NotImplementedException();
         }
     }
 }

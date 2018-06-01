@@ -11,6 +11,13 @@ namespace Consolehub.Commands
     {
         public override string Name => "prompt";
 
+        public override string Description => "prompt [new prompt] [options]: Sets a new prompt to the program";
+
+        public override string[] Options => new[]
+        {
+            "--reset: Resets the prompt to the default one",
+        };
+
         /// <summary>
         /// New prompt to be set.
         /// </summary>
@@ -30,9 +37,7 @@ namespace Consolehub.Commands
             // Handle flags (if any).
             if (flags.Length > 0)
             {
-                command.resetPrompt = flags
-                                .Where(flag => flag == "--reset")
-                                .Count() > 0;
+                command.resetPrompt = flags.Count(flag => flag == "--reset") > 0;
             }
 
             // Handle args (if any).
@@ -54,19 +59,12 @@ namespace Consolehub.Commands
                 return Task.FromResult(0);
             } else if (newPrompt == null)
             {
-                PrintHelp();
                 return Task.FromResult(0);
             }
 
             SettingsManager.Set("prompt", newPrompt);
             Ui.DefaultPrompt = newPrompt;
             return Task.FromResult(0);
-        }
-
-        public override void PrintHelp()
-        {
-            Ui.WriteLineBlue("prompt [new prompt] - Sets a new prompt");
-            Ui.WriteLineBlue("prompt --reset - Resets the prompt to the default one");
         }
     }
 }

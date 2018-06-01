@@ -12,6 +12,10 @@ namespace Consolehub.Commands
     {
         public override string Name => "login";
 
+        public override string Description => "login: Shows the login wizard to help you through the login process";
+
+        public override string[] Options => new string[0];
+
         public override Command CreateCommand(string[] args, string[] flags)
         {
             return new LoginCommand();
@@ -56,11 +60,6 @@ namespace Consolehub.Commands
 
             // Save this access token.
             SettingsManager.Set("access_token", accessToken);
-        }
-
-        public override void PrintHelp()
-        {
-            Ui.WriteLineBlue("login - Shows the login wizard to help you through the login process.");
         }
     }
 }

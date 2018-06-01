@@ -15,30 +15,32 @@ namespace Consolehub.Commands
         public abstract string Name { get; }
 
         /// <summary>
+        /// General description of the command. What it does, how it does it, etc.
+        /// </summary>
+        public abstract string Description { get; }
+
+        /// <summary>
+        /// Options (or flags) of the command. Example: --reset in ChangePromptCommand.
+        /// </summary>
+        public abstract string[] Options { get; }
+
+        /// <summary>
         /// Checks whether the user is logged in and has access to the current command. Called from a
         /// Command subclass.
         /// </summary>
         /// <returns>True if user is logged in, False if not</returns>
-        protected bool checkUserIsLoggedIn()
+        protected bool IsUserLoggedIn()
         {
-            if (!SettingsManager.Exists("access_token"))
-            {
-                Ui.WriteLineRed("You need to log in before doing this.");
-                return false;
-            }
+            if (SettingsManager.Exists("access_token")) return true;
 
-            return true;
+            Ui.WriteLineRed("You need to log in before doing this.");
+            return false;
         }
 
         /// <summary>
         /// Executes the current command.
         /// </summary>
         public abstract Task Execute();
-
-        /// <summary>
-        /// Prints the command's help section.
-        /// </summary>
-        public abstract void PrintHelp();
 
         /// <summary>
         /// Creates a command from the given args.

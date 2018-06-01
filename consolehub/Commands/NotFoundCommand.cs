@@ -11,6 +11,10 @@ namespace Consolehub.Commands
     {
         public override string Name => "";
 
+        public override string Description => "";
+
+        public override string[] Options => new string[0];
+
         public override Command CreateCommand(string[] args, string[] flags)
         {
             return new NotFoundCommand();
@@ -20,11 +24,6 @@ namespace Consolehub.Commands
         {
             Ui.WriteLineRed("Command not recognized. Use help to print all the available commands");
             return Task.FromResult(0);
-        }
-
-        public override void PrintHelp()
-        {
-            Console.WriteLine("");
         }
     }
 }

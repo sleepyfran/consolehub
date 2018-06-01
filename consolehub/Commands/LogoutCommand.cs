@@ -11,6 +11,10 @@ namespace Consolehub.Commands
     {
         public override string Name => "logout";
 
+        public override string Description => "logout: Closes the current user session";
+
+        public override string[] Options => new string[0];
+
         public override Command CreateCommand(string[] args, string[] flags)
         {
             return new LogoutCommand();
@@ -25,11 +29,6 @@ namespace Consolehub.Commands
             Console.WriteLine("You're now logged out.");
 
             return Task.FromResult(0);
-        }
-
-        public override void PrintHelp()
-        {
-            Ui.WriteLineBlue("logout - Logs out from the current account");
         }
     }
 }

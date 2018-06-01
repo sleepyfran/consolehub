@@ -12,6 +12,13 @@ namespace Consolehub.Commands
     {
         public override string Name => "repos";
 
+        public override string Description => "repos [user] [options]: Shows the login wizard to help you through the login process.";
+
+        public override string[] Options => new[]
+        {
+            "--ignore-private: Ignores the private repositories",
+        };
+
         /// <summary>
         /// Username in GitHub from whom we will get the repositories.
         /// </summary>
@@ -87,9 +94,7 @@ namespace Consolehub.Commands
             // Attempt to get the available flags.
             if (flags.Length > 0)
             {
-                bool ignorePrivates = flags
-                                        .Where(arg => arg.Equals("--ignore-private"))
-                                        .Count() > 0;
+                bool ignorePrivates = flags.Count(arg => arg.Equals("--ignore-private")) > 0;
 
                 command.ignorePrivateRepositories = ignorePrivates;
             }
@@ -105,7 +110,7 @@ namespace Consolehub.Commands
 
         public override async Task Execute()
         {
-            if (!checkUserIsLoggedIn())
+            if (!IsUserLoggedIn())
             {
                 return;
             }
@@ -141,13 +146,6 @@ namespace Consolehub.Commands
 
                 Console.WriteLine();
             }
-        }
-
-        public override void PrintHelp()
-        {
-            Ui.WriteLineBlue("repos [username] [options] - List all the repos of the specified username");
-            Ui.WriteLineBlue("OPTIONS");
-            Ui.WriteLineBlue("--ignore-private: Ignore user's private repositories");
         }
     }
 }

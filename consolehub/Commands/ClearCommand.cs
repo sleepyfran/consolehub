@@ -11,6 +11,10 @@ namespace Consolehub.Commands
     {
         public override string Name => "clear";
 
+        public override string Description => "clear: Clears the console screen";
+
+        public override string[] Options => new string[0];
+
         public override Command CreateCommand(string[] args, string[] flags)
         {
             return new ClearCommand();
@@ -20,11 +24,6 @@ namespace Consolehub.Commands
         {
             Console.Clear();
             return Task.FromResult(0);
-        }
-
-        public override void PrintHelp()
-        {
-            Ui.WriteLineBlue("clear - Clears the current screen");
         }
     }
 }

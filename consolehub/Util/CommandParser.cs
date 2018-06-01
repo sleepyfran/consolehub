@@ -54,12 +54,6 @@ namespace Consolehub.Util
                                 .Where(arg => arg.StartsWith("--"))
                                 .ToArray();
 
-            if (flags.Contains("--help"))
-            {
-                command.PrintHelp();
-                return null;
-            }
-
             // The rest of them, skipping the first (command name) should be the arguments.
             string[] commandArgs = args
                                     .Skip(1)

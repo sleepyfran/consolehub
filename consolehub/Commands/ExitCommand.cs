@@ -11,6 +11,10 @@ namespace Consolehub.Commands
     {
         public override string Name => "exit";
 
+        public override string Description => "exit: What do you think it does?";
+
+        public override string[] Options => new string[0];
+
         public override Command CreateCommand(string[] args, string[] flags)
         {
             return new ExitCommand();
@@ -20,11 +24,6 @@ namespace Consolehub.Commands
         {
             Environment.Exit(0);
             return Task.FromResult(0);
-        }
-
-        public override void PrintHelp()
-        {
-            Ui.WriteLineBlue("exit - Pretty self-explanatory, don't you think?");
         }
     }
 }
