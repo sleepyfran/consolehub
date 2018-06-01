@@ -47,23 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiKeys.cs" />
     <Compile Include="Commands\ChangePromptCommand.cs" />
     <Compile Include="Commands\ClearCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IssuesCommand.cs" />
+    <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\LogoutCommand.cs" />
     <Compile Include="Commands\NotFoundCommand.cs" />
     <Compile Include="Commands\ReposCommand.cs" />
-    <Compile Include="ApiKeys.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\LoginCommand.cs" />
-    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Util\CommandParser.cs" />
     <Compile Include="Util\GHClient.cs" />
     <Compile Include="Util\SettingsManager.cs" />
-    <Compile Include="Util\UI.cs" />
+    <Compile Include="Util\Ui.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

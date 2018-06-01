@@ -8,11 +8,11 @@ using System.Diagnostics;
 
 namespace Consolehub.Commands
 {
-    public class LoginCommand : ICommand
+    public class LoginCommand : Command
     {
         public override string Name => "login";
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             return new LoginCommand();
         }
@@ -60,7 +60,7 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            UI.WriteLineBlue("login - Shows the login wizard to help you through the login process.");
+            Ui.WriteLineBlue("login - Shows the login wizard to help you through the login process.");
         }
     }
 }

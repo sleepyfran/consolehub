@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Consolehub.Commands
 {
-    class ExitCommand : ICommand
+    class ExitCommand : Command
     {
         public override string Name => "exit";
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             return new ExitCommand();
         }
@@ -24,7 +24,7 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            UI.WriteLineBlue("exit - Pretty self-explanatory, don't you think?");
+            Ui.WriteLineBlue("exit - Pretty self-explanatory, don't you think?");
         }
     }
 }

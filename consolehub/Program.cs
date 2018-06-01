@@ -16,7 +16,7 @@ namespace Consolehub
         {
             // Initialize app.
             SettingsManager.Init();
-            ICommand[] availableCommands =
+            Command[] availableCommands =
             {
                 new LoginCommand(),
                 new LogoutCommand(),
@@ -28,7 +28,7 @@ namespace Consolehub
             };
             var parser = new CommandParser(availableCommands);
 
-            UI.PrintMainTitle();
+            Ui.PrintMainTitle();
 
             ConsoleHub(parser).GetAwaiter().GetResult();
         }
@@ -39,7 +39,7 @@ namespace Consolehub
             if (SettingsManager.Exists("prompt"))
             {
                 var prompt = SettingsManager.Get("prompt");
-                UI.DefaultPrompt = prompt;
+                Ui.DefaultPrompt = prompt;
             }
 
             if (!SettingsManager.Exists("access_token"))
@@ -55,29 +55,29 @@ namespace Consolehub
 
             // Get the current logged in user to show the data.
             var currentUser = await GHClient.client.User.Current();
-            UI.WriteLineGreen($"You're logged in as {currentUser.Name} ({currentUser.Email})");
+            Ui.WriteLineGreen($"You're logged in as {currentUser.Name} ({currentUser.Email})");
             string[] dividedCommand;
 
             while (true)
             {
-                UI.WritePrompt();
+                Ui.WritePrompt();
 
                 var input = Console.ReadLine();
                 dividedCommand = parser.SplitInput(input);
 
-                ICommand cmd = null;
+                Command cmd = null;
 
                 try
                 {
                     cmd = parser.ParseCommand(dividedCommand);
                 } catch (Exception error)
                 {
-                    UI.WriteLineRed(error.Message);
+                    Ui.WriteLineRed(error.Message);
                 }
 
                 if (cmd != null)
                 {
-                    UI.NewLine();
+                    Ui.NewLine();
 
                     await cmd.Execute();
                 }

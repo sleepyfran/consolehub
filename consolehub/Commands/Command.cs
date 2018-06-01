@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Consolehub.Commands
 {
-    public abstract class ICommand
+    public abstract class Command
     {
         /// <summary>
         /// Indicates the text that matches this command. Ex: login, repository or user.
@@ -23,7 +23,7 @@ namespace Consolehub.Commands
         {
             if (!SettingsManager.Exists("access_token"))
             {
-                UI.WriteLineRed("You need to log in before doing this.");
+                Ui.WriteLineRed("You need to log in before doing this.");
                 return false;
             }
 
@@ -45,6 +45,6 @@ namespace Consolehub.Commands
         /// </summary>
         /// <param name="args">Arguments passed to the command</param>
         /// <param name="flags">Flags passed to the command</param>
-        public abstract ICommand CreateCommand(string[] args, string[] flags);
+        public abstract Command CreateCommand(string[] args, string[] flags);
     }
 }

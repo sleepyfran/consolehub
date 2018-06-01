@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Consolehub.Util
 {
-    static class UI
+    static class Ui
     {
 
         /// <summary>
@@ -41,10 +41,25 @@ namespace Consolehub.Util
             Console.WriteLine();
         }
 
+        public static void Write(string text)
+        {
+            Console.Write(text);
+        }
+
+        public static void WriteLine(string text)
+        {
+            Console.WriteLine(text);
+        }
+
         public static void WritePrompt()
         {
             NewLine();
             Console.Write(DefaultPrompt);
+        }
+
+        public static void PrintError(string error)
+        {
+            SetTemporalColor(ConsoleColor.Red, () => WriteLine(error));
         }
 
         #region Red printing

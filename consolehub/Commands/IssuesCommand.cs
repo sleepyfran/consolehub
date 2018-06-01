@@ -8,7 +8,7 @@ using Octokit;
 
 namespace Consolehub.Commands
 {
-    class IssuesCommand : ICommand
+    class IssuesCommand : Command
     {
         public override string Name => "issues";
 
@@ -27,7 +27,7 @@ namespace Consolehub.Commands
         /// </summary>
         private DateTimeOffset issuesSince = DateTimeOffset.Now.Subtract(TimeSpan.FromDays(365));
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             var command = new IssuesCommand();
 
@@ -100,9 +100,9 @@ namespace Consolehub.Commands
 
             foreach (var issue in issues)
             {
-                UI.WriteCyan($"{issue.Repository.Name} ");
+                Ui.WriteCyan($"{issue.Repository.Name} ");
                 Console.Write($"#{issue.Number} - ");
-                UI.WriteBlue(issue.Title);
+                Ui.WriteBlue(issue.Title);
                 Console.WriteLine($", created by {issue.User.Name}");
 
                 var date = issue.CreatedAt;
@@ -110,11 +110,11 @@ namespace Consolehub.Commands
 
                 if (issue.State.StringValue == "open")
                 {
-                    UI.WriteLineGreen($"open");
+                    Ui.WriteLineGreen($"open");
                 }
                 else
                 {
-                    UI.WriteLineRed($"closed");
+                    Ui.WriteLineRed($"closed");
                 }
 
                 Console.WriteLine();
@@ -123,9 +123,9 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            UI.WriteLineBlue("issues [filter] [state] - Shows a list of all your current issues");
-            UI.WriteLineBlue("[filter]: all (default), assigned, created, mentioned and subscribed");
-            UI.WriteLineBlue("[state]: all (default), closed and open");
+            Ui.WriteLineBlue("issues [filter] [state] - Shows a list of all your current issues");
+            Ui.WriteLineBlue("[filter]: all (default), assigned, created, mentioned and subscribed");
+            Ui.WriteLineBlue("[state]: all (default), closed and open");
         }
     }
 }

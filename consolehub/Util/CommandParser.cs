@@ -10,9 +10,9 @@ namespace Consolehub.Util
 {
     class CommandParser
     {
-        private IEnumerable<ICommand> availableCommands;
+        private IEnumerable<Command> availableCommands;
 
-        public CommandParser(IEnumerable<ICommand> commands)
+        public CommandParser(IEnumerable<Command> commands)
         {
             this.availableCommands = commands;
         }
@@ -33,7 +33,7 @@ namespace Consolehub.Util
         /// </summary>
         /// <param name="args">Array of strings with the tokens</param>
         /// <returns>A Command interface subclass that matches the given command</returns>
-        internal ICommand ParseCommand(string[] args)
+        internal Command ParseCommand(string[] args)
         {
             var commandName = args[0];
 
@@ -69,7 +69,7 @@ namespace Consolehub.Util
             return command.CreateCommand(commandArgs, flags);
         }
 
-        private ICommand FindCommand(String name)
+        private Command FindCommand(String name)
         {
             return availableCommands
                    .FirstOrDefault(cmd => cmd.Name.Equals(name));

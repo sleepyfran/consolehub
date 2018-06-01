@@ -7,18 +7,18 @@ using Consolehub.Util;
 
 namespace Consolehub.Commands
 {
-    class NotFoundCommand : ICommand
+    class NotFoundCommand : Command
     {
         public override string Name => "";
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             return new NotFoundCommand();
         }
 
         public override Task Execute()
         {
-            UI.WriteLineRed("Command not recognized. Use help to print all the available commands");
+            Ui.WriteLineRed("Command not recognized. Use help to print all the available commands");
             return Task.FromResult(0);
         }
 

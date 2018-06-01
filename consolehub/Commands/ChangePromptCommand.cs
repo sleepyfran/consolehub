@@ -7,7 +7,7 @@ using Consolehub.Util;
 
 namespace Consolehub.Commands
 {
-    class ChangePromptCommand : ICommand
+    class ChangePromptCommand : Command
     {
         public override string Name => "prompt";
 
@@ -23,7 +23,7 @@ namespace Consolehub.Commands
 
         public ChangePromptCommand() { }
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             var command = new ChangePromptCommand();
 
@@ -50,7 +50,7 @@ namespace Consolehub.Commands
             if (resetPrompt)
             {
                 SettingsManager.Remove("prompt");
-                UI.DefaultPrompt = "> ";
+                Ui.DefaultPrompt = "> ";
                 return Task.FromResult(0);
             } else if (newPrompt == null)
             {
@@ -59,14 +59,14 @@ namespace Consolehub.Commands
             }
 
             SettingsManager.Set("prompt", newPrompt);
-            UI.DefaultPrompt = newPrompt;
+            Ui.DefaultPrompt = newPrompt;
             return Task.FromResult(0);
         }
 
         public override void PrintHelp()
         {
-            UI.WriteLineBlue("prompt [new prompt] - Sets a new prompt");
-            UI.WriteLineBlue("prompt --reset - Resets the prompt to the default one");
+            Ui.WriteLineBlue("prompt [new prompt] - Sets a new prompt");
+            Ui.WriteLineBlue("prompt --reset - Resets the prompt to the default one");
         }
     }
 }

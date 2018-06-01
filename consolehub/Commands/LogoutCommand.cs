@@ -7,11 +7,11 @@ using Consolehub.Util;
 
 namespace Consolehub.Commands
 {
-    class LogoutCommand : ICommand
+    class LogoutCommand : Command
     {
         public override string Name => "logout";
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             return new LogoutCommand();
         }
@@ -29,7 +29,7 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            UI.WriteLineBlue("logout - Logs out from the current account");
+            Ui.WriteLineBlue("logout - Logs out from the current account");
         }
     }
 }

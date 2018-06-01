@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Consolehub.Commands
 {
-    class HelpCommand : ICommand
+    class HelpCommand : Command
     {
         public override string Name => "help";
 
         /// <summary>
         /// List of available commands in the program.
         /// </summary>
-        private IEnumerable<ICommand> availableCommands;
+        private IEnumerable<Command> availableCommands;
 
-        public HelpCommand(IEnumerable<ICommand> availableCommands)
+        public HelpCommand(IEnumerable<Command> availableCommands)
         {
             this.availableCommands = availableCommands;
         }
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             throw new NotImplementedException();
         }
@@ -31,7 +31,7 @@ namespace Consolehub.Commands
             foreach (var command in availableCommands)
             {
                 command.PrintHelp();
-                UI.NewLine();
+                Ui.NewLine();
             }
 
             return Task.FromResult(0);

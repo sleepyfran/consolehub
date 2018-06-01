@@ -8,7 +8,7 @@ using Consolehub.Util;
 
 namespace Consolehub.Commands
 {
-    class ReposCommand : ICommand
+    class ReposCommand : Command
     {
         public override string Name => "repos";
 
@@ -30,7 +30,7 @@ namespace Consolehub.Commands
         /// <param name="username">Username that could not be found</param>
         private void showUsernameNotFoundError(string username)
         {
-            UI.WriteLineRed($"The username {username} doesn't exist");
+            Ui.WriteLineRed($"The username {username} doesn't exist");
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Consolehub.Commands
         /// <param name="error">Exception to print</param>
         private void showException(Exception error)
         {
-            UI.WriteLineRed(error.Message);
+            Ui.WriteLineRed(error.Message);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Consolehub.Commands
             return new List<Repository>();
         }
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             var command = new ReposCommand();
 
@@ -135,9 +135,9 @@ namespace Consolehub.Commands
                 var repository = repositories[i];
 
                 Console.Write($"{i + 1}. ");
-                UI.WriteCyan($"{repository.FullName}");
+                Ui.WriteCyan($"{repository.FullName}");
                 Console.Write($" - ");
-                UI.WriteBlue(repository.Description);
+                Ui.WriteBlue(repository.Description);
 
                 Console.WriteLine();
             }
@@ -145,9 +145,9 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            UI.WriteLineBlue("repos [username] [options] - List all the repos of the specified username");
-            UI.WriteLineBlue("OPTIONS");
-            UI.WriteLineBlue("--ignore-private: Ignore user's private repositories");
+            Ui.WriteLineBlue("repos [username] [options] - List all the repos of the specified username");
+            Ui.WriteLineBlue("OPTIONS");
+            Ui.WriteLineBlue("--ignore-private: Ignore user's private repositories");
         }
     }
 }

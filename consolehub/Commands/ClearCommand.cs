@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Consolehub.Commands
 {
-    class ClearCommand : ICommand
+    class ClearCommand : Command
     {
         public override string Name => "clear";
 
-        public override ICommand CreateCommand(string[] args, string[] flags)
+        public override Command CreateCommand(string[] args, string[] flags)
         {
             return new ClearCommand();
         }
@@ -24,7 +24,7 @@ namespace Consolehub.Commands
 
         public override void PrintHelp()
         {
-            UI.WriteLineBlue("clear - Clears the current screen");
+            Ui.WriteLineBlue("clear - Clears the current screen");
         }
     }
 }
